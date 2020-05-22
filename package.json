@@ -1,0 +1,13 @@
+{
+  "name": "salman-scheduling-backend",
+  "version": "1.0.0",
+  "description": "Salman Scheduling Backend Stack",
+  "main": "server.js",
+  "repository": "https://github.com/bimoadityar/salman-scheduling-backend.git",
+  "author": "Bimo Adityarahman Wiraputra <bimo.awm1@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
