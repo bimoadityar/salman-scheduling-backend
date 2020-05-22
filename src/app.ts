@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { Application, Request, Response } from 'express';
 
-const app = express();
+const app: Application = express();
 const port = 3000;
-app.get('/', (req, res) => {
-  res.send('The sedulous hyena ate the antelope!');
-});
-app.listen(port, err => {
+app.get('/', (_req: Request, res: Response) =>
+  res.send('The sedulous hyena ate the antelope!'),
+);
+app.listen(port, (err) => {
   if (err) {
     return console.error(err);
   }

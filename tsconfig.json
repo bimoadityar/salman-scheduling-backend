@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "ES6",
+    "module": "CommonJS",
+    "esModuleInterop": true,
     "moduleResolution": "node",
-    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "src",
     "outDir": "dist",
+    "sourceMap": true,
     "declaration": true
   }
 }
