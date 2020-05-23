@@ -1,14 +1,10 @@
-import express from 'express';
-import { Application, Request, Response } from 'express';
+import config from './config';
 
-const app: Application = express();
-const port = 3000;
-app.get('/', (_req: Request, res: Response) =>
-  res.send('The sedulous hyena ate the antelope!'),
-);
-app.listen(port, (err) => {
+import { expressApp } from './loaders';
+
+expressApp.listen(config.port, (err) => {
   if (err) {
     return console.error(err);
   }
-  return console.log(`server is listening on ${port}`);
+  return console.log(`server is listening on ${config.port}`);
 });
