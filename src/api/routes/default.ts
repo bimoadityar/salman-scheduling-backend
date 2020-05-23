@@ -1,13 +1,15 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+
+import responses from '../responses';
 
 const route: Router = Router();
 
-route.get('/', (_req: Request, res: Response): void => {
-  res.status(200).send('The sedulous hyena ate the antelope!');
+route.get('/status', (_req, res) => {
+  responses.sendOk(res);
 });
 
-route.use((_req: Request, res: Response): void => {
-  res.status(404).send('Not found');
+route.head('/status', (_req, res) => {
+  responses.sendOk(res);
 });
 
 export default route;
