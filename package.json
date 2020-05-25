@@ -10,7 +10,8 @@
     "test": "yarn test:lint && yarn test:format",
     "test:lint": "node_modules/eslint/bin/eslint.js src",
     "test:format": "node_modules/prettier/bin-prettier.js src --check",
-    "migrate:latest": "yarn knex migrate:latest"
+    "migrate:latest": "yarn knex migrate:latest",
+    "seed": "yarn knex seed:run"
   },
   "repository": "https://github.com/bimoadityar/salman-scheduling-backend.git",
   "author": "Bimo Adityarahman Wiraputra <bimo.awm1@gmail.com>",

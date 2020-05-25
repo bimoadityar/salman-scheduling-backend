@@ -12,5 +12,11 @@
     "sourceMap": true,
     "declaration": true
   },
-  "exclude": ["node_modules", "dist", "knexfile.ts", "src/models/migrations"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "knexfile.ts",
+    "src/models/migrations",
+    "src/models/seeds"
+  ]
 }

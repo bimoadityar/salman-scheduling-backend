@@ -1,4 +1,4 @@
-import { knexMigrator } from '../migrationUtil';
+import { knexMigrator } from '../knexMigrator';
 
 const up: knexMigrator = async (knex) => {
   await knex.schema.createTable('room', (table) => {

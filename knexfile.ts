@@ -7,5 +7,11 @@ module.exports = {
       tableName: 'knex_migrations',
       directory: './src/models/migrations',
     },
+    seeds: {
+      directory:
+        config.env === 'development'
+          ? './src/models/seeds/dummy'
+          : './src/models/seeds/production',
+    },
   },
 };
