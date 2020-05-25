@@ -9,7 +9,8 @@
     "build": "rimraf dist && tsc",
     "test": "yarn test:lint && yarn test:format",
     "test:lint": "node_modules/eslint/bin/eslint.js src",
-    "test:format": "node_modules/prettier/bin-prettier.js src --check"
+    "test:format": "node_modules/prettier/bin-prettier.js src --check",
+    "migrate:latest": "yarn knex migrate:latest"
   },
   "repository": "https://github.com/bimoadityar/salman-scheduling-backend.git",
   "author": "Bimo Adityarahman Wiraputra <bimo.awm1@gmail.com>",
@@ -19,7 +20,9 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "pg": "^8.2.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
