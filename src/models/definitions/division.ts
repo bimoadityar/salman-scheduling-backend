@@ -1,11 +1,11 @@
 import { Model } from 'objection';
 
-class Room extends Model {
+class Division extends Model {
   id: number;
   name: string;
 
   static get tableName(): string {
-    return 'room';
+    return 'division';
   }
 
   static get jsonSchema(): Record<string, unknown> {
@@ -20,4 +20,4 @@ class Room extends Model {
   }
 }
 
-export default Room;
+export default Division;

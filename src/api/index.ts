@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import defaultRoute from './routes/default';
-import roomRoute from './routes/room';
+import divisionRoute from './routes/division';
 
 const route: Router = Router();
 
-route.use('/room', roomRoute);
+route.use('/division', divisionRoute);
 route.use(defaultRoute);
 
 export default route;

@@ -1,3 +1,3 @@
-import Room from './definitions/room';
+import Division from './definitions/division';
 
-export { Room };
+export { Division };
