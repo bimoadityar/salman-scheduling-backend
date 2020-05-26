@@ -1,13 +1,13 @@
-import { knexMigrator } from '../knexMigrator';
+import Knex from 'knex';
 
-const up: knexMigrator = async (knex) => {
+const up = async (knex: Knex): Promise<void> => {
   await knex.schema.createTable('room', (table) => {
     table.increments('id').unsigned().primary();
     table.string('name', 60).notNullable().unique();
   });
 };
 
-const down: knexMigrator = async (knex) => {
+const down = async (knex: Knex): Promise<void> => {
   await knex.schema.dropTable('room');
 };
 

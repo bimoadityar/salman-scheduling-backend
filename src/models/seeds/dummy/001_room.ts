@@ -1,6 +1,6 @@
-import { knexMigrator } from '../../knexMigrator';
+import Knex from 'knex';
 
-const seed: knexMigrator = async (knex) => {
+const seed = async (knex: Knex): Promise<void> => {
   await knex('room').del();
   await knex('room').insert([
     { name: 'room A' },
