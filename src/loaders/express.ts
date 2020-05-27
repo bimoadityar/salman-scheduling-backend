@@ -10,7 +10,15 @@ import responses from '../api/responses';
 const app: Application = express();
 app.enable('trust proxy');
 app.use(cors());
-app.use(bodyParser.json());
+app.use((req, res, next) => {
+  bodyParser.json()(req, res, (err) => {
+    if (err) {
+      return responses.sendBadRequest(res, { body: 'body is badly formatted' });
+    }
+
+    next();
+  });
+});
 app.use(config.api.prefix, route);
 
 app.use((_req, res) => {

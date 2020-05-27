@@ -13,10 +13,21 @@ class Division extends Model {
       type: 'object',
       properties: {
         id: { type: 'integer', minimum: 0 },
-        name: { type: 'string', minLength: 1, maxLength: 60 },
+        name: {
+          type: 'string',
+          minLength: 1,
+          maxLength: 60,
+          pattern: '^[ -~]+$',
+        },
       },
       required: ['name'],
     };
+  }
+
+  $formatDatabaseJson(json: Record<string, unknown>): Record<string, unknown> {
+    json = super.$formatDatabaseJson(json);
+    delete json.id;
+    return json;
   }
 }
 

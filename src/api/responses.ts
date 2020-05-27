@@ -1,5 +1,7 @@
 import { Response } from 'express';
 
+import { ParsedError } from '../services/parsedError';
+
 type ResponseData = null | Record<string, unknown>;
 
 const sendOk = (res: Response, data: ResponseData = null): void => {
@@ -34,6 +36,24 @@ const sendInternalError = (res: Response, message = ''): void => {
   res.status(500).json({ status: 'error', message });
 };
 
+const handleError = (res: Response, err: Error): void => {
+  if (!(err instanceof ParsedError && err.data)) {
+    sendInternalError(res, err.message);
+  } else if (err.message === 'bad request') {
+    sendBadRequest(res, err.data);
+  } else if (err.message === 'unauthorized') {
+    sendUnauthorized(res, err.data);
+  } else if (err.message === 'forbidden') {
+    sendUnauthorized(res, err.data);
+  } else if (err.message === 'not found') {
+    sendNotFound(res, err.data);
+  } else if (err.message === 'conflict') {
+    sendConflict(res, err.data);
+  } else {
+    sendInternalError(res, err.message);
+  }
+};
+
 export default {
   sendOk,
   sendCreated,
@@ -43,4 +63,5 @@ export default {
   sendNotFound,
   sendConflict,
   sendInternalError,
+  handleError,
 };
