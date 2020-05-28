@@ -1,5 +1,5 @@
 import expressApp from './express';
-import './knex';
+import knex from './knex';
 import './objection';
 
-export { expressApp };
+export { expressApp, knex };

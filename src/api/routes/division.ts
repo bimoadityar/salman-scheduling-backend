@@ -37,7 +37,7 @@ route.get('/:id', async (req, res) => {
   }
 });
 
-route.put('/', async (req, res) => {
+route.post('/', async (req, res) => {
   try {
     const divisionQuery = req.body;
 
@@ -54,7 +54,6 @@ route.patch('/:id', async (req, res) => {
     const divisionQuery = req.body;
 
     const division = await updateDivision(id, divisionQuery);
-    console.log(division);
     if (!division) {
       responses.sendNotFound(res, {
         division: "division requested doesn't exist",

@@ -36,7 +36,7 @@ const parseError = (err: Error): ParsedError => {
   }
 
   if (
-    (match = /Key \((\w+)\)=\((\w+)\) already exists./.exec(pgError.detail))
+    (match = /Key \((\w+)\)=\(([ -~]+)\) already exists./.exec(pgError.detail))
   ) {
     return new ParsedError('conflict', {
       [match[1]]: `${match[1]} already exist`,
