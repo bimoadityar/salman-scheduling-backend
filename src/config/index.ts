@@ -30,4 +30,8 @@ export default {
       tableName: 'knex_migrations',
     },
   },
+
+  log: {
+    filename: process.env.LOG_FILENAME,
+  },
 };
