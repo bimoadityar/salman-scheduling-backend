@@ -1,6 +1,6 @@
 import config from './config';
 
-import { expressApp } from './loaders';
+import expressApp from '.';
 
 expressApp.listen(config.port, (err) => {
   if (err) {

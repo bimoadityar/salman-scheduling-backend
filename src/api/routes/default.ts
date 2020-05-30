@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
-import responses from '../responses';
+import sendResponse from '../send-response';
 
 const route: Router = Router();
 
 route.get('/status', (_req, res) => {
-  responses.sendOk(res);
+  sendResponse(res, 200);
 });
 
 route.head('/status', (_req, res) => {
-  responses.sendOk(res);
+  sendResponse(res, 200);
 });
 
 export default route;

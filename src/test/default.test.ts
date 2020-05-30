@@ -20,6 +20,20 @@ describe('Default Route', () => {
       expect(res.statusCode).toEqual(200);
       expect(res.body).toEqual({ status: 'success', data: null });
     });
+
+    it('check invalid body', async () => {
+      const res = await requestApp
+        .post(`${prefix}/status`)
+        .send('{"invalid"}')
+        .type('json')
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({
+        status: 'fail',
+        data: { body: 'body is badly formatted' },
+      });
+    });
   });
 
   describe('HEAD /status', () => {
@@ -48,8 +62,4 @@ describe('Default Route', () => {
       );
     });
   });
-});
-
-test('placeholder', () => {
-  expect(true).toEqual(true);
 });
