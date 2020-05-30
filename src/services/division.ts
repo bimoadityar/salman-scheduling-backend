@@ -1,5 +1,5 @@
 import { Division } from '../models';
-import { parseError } from './parsedError';
+import parsePgError from '../models/parse-pg-error';
 
 const getDivisions = async (): Promise<Division[]> => {
   return Division.query().orderBy('id');
@@ -9,7 +9,7 @@ const getDivision = async (id: number): Promise<Division> => {
   try {
     return await Division.query().findById(id);
   } catch (err) {
-    throw parseError(err);
+    throw parsePgError(err);
   }
 };
 
@@ -17,7 +17,7 @@ const createDivision = async (division: Division): Promise<Division> => {
   try {
     return await Division.query().insert(division).returning('*');
   } catch (err) {
-    throw parseError(err);
+    throw parsePgError(err);
   }
 };
 
@@ -28,7 +28,7 @@ const updateDivision = async (
   try {
     return await Division.query().findById(id).patch(division).returning('*');
   } catch (err) {
-    throw parseError(err);
+    throw parsePgError(err);
   }
 };
 
@@ -36,7 +36,7 @@ const deleteDivision = async (id: number): Promise<boolean> => {
   try {
     return (await Division.query().deleteById(id)) > 0;
   } catch (err) {
-    throw parseError(err);
+    throw parsePgError(err);
   }
 };
 

@@ -1,13 +1,6 @@
 import { DBError } from 'db-errors';
 
-class ParsedError extends Error {
-  data!: Record<string, string>;
-
-  constructor(message: string, data: Record<string, string>) {
-    super(message);
-    this.data = data;
-  }
-}
+import ParsedError from '../helpers/parsed-error';
 
 const isPgError = (err: Error): boolean => {
   return 'detail' in err;
@@ -17,11 +10,11 @@ interface PgError extends Error {
   detail: string;
 }
 
-const parseError = (err: Error): ParsedError => {
+const parsePgError = (err: Error): ParsedError => {
   let match: string[];
   if (err.name === 'ValidationError') {
     const [, field, message] = /^([ -~]+): ([ -~]+)$/.exec(err.message);
-    return new ParsedError('bad request', {
+    return new ParsedError(err.message, 400, {
       [field]: `${field} ${message}`,
     });
   }
@@ -32,22 +25,24 @@ const parseError = (err: Error): ParsedError => {
   } else if (err instanceof DBError && isPgError(err.nativeError)) {
     pgError = err.nativeError as PgError;
   } else {
-    return new ParsedError(err.message, null);
+    return new ParsedError(err.message, 500, null);
   }
 
   if (
     (match = /Key \((\w+)\)=\(([ -~]+)\) already exists./.exec(pgError.detail))
   ) {
-    return new ParsedError('conflict', {
+    return new ParsedError('conflict', 409, {
       [match[1]]: `${match[1]} already exist`,
     });
   } else if (
     pgError.message.includes('invalid input syntax for type integer')
   ) {
-    return new ParsedError('bad request', { id: "id isn't a valid integer" });
+    return new ParsedError('bad request', 400, {
+      id: "id isn't a valid integer",
+    });
   } else {
-    return new ParsedError(err.message, null);
+    return new ParsedError(err.message, 500, null);
   }
 };
 
-export { ParsedError, parseError };
+export default parsePgError;
