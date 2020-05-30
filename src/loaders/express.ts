@@ -18,7 +18,7 @@ app.use(config.api.prefix, route);
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   if (err) {
     if (err instanceof ParsedError) {
-      sendResponse(res, err.code, err.data);
+      sendResponse(res, err.code, err.data || err.message);
     } else if (err instanceof SyntaxError) {
       sendResponse(res, 400, { body: 'body is badly formatted' });
     } else {
