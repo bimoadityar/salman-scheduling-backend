@@ -1,14 +1,18 @@
 import Knex from 'knex';
+import { Model } from 'objection';
+
+import Division from '../../definitions/division';
 
 const seed = async (knex: Knex): Promise<void> => {
-  await knex('division').del();
-  await knex('division').insert([
-    { name: 'Informatics Engineering' },
-    { name: 'Information System and Technology' },
-    { name: 'Electrical Engineering' },
-    { name: 'Biomedical Engineering' },
-    { name: 'Electrical Power Engineering' },
-    { name: 'Telecommunication Engineering' },
+  Model.knex(knex);
+  await Division.query().delete();
+  await Division.query().insert([
+    { id: 1, name: 'Informatics Engineering' },
+    { id: 2, name: 'Information System and Technology' },
+    { id: 3, name: 'Electrical Engineering' },
+    { id: 4, name: 'Biomedical Engineering' },
+    { id: 5, name: 'Electrical Power Engineering' },
+    { id: 6, name: 'Telecommunication Engineering' },
   ]);
 };
 

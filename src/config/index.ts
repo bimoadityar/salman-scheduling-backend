@@ -15,6 +15,10 @@ export default {
     prefix: process.env.API_PREFIX,
   },
 
+  password: {
+    saltRounds: +process.env.PASSWORD_SALT_ROUNDS,
+  },
+
   database: {
     client: process.env.DB_CLIENT,
     connection: {

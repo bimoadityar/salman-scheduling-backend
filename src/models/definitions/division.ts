@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 
+import User from './user';
 class Division extends Model {
   id: number;
   name: string;
@@ -12,7 +13,7 @@ class Division extends Model {
     return {
       type: 'object',
       properties: {
-        id: { type: 'integer', minimum: 0 },
+        id: { type: 'integer', minimum: 1 },
         name: {
           type: 'string',
           minLength: 1,
@@ -24,11 +25,16 @@ class Division extends Model {
     };
   }
 
-  $formatDatabaseJson(json: Record<string, unknown>): Record<string, unknown> {
-    json = super.$formatDatabaseJson(json);
-    delete json.id;
-    return json;
-  }
+  static relationMappings = {
+    user: {
+      relation: Model.HasManyRelation,
+      modelClass: User,
+      join: {
+        from: 'division.id',
+        to: 'user.divisionId',
+      },
+    },
+  };
 }
 
 export default Division;

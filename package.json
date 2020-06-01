@@ -21,6 +21,7 @@
   "private": true,
   "dependencies": {
     "@types/lodash": "^4.14.154",
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "db-errors": "^0.2.3",

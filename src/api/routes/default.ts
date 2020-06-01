@@ -8,8 +8,4 @@ route.get('/status', (_req, res) => {
   sendResponse(res, 200);
 });
 
-route.head('/status', (_req, res) => {
-  sendResponse(res, 200);
-});
-
 export default route;
