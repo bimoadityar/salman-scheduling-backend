@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import _ from 'lodash';
 
 import {
   getDivisions,
@@ -31,7 +32,7 @@ route.get('/:id', async (req, res) => {
 });
 
 route.post('/', async (req, res) => {
-  const divisionQuery = req.body;
+  const divisionQuery = _.pick(req.body, ['name']);
 
   const division = await createDivision(divisionQuery);
   sendResponse(res, 201, { division });
@@ -39,7 +40,7 @@ route.post('/', async (req, res) => {
 
 route.patch('/:id', async (req, res) => {
   const id = +req.params.id;
-  const divisionQuery = req.body;
+  const divisionQuery = _.pick(req.body, ['name']);
 
   const division = await updateDivision(id, divisionQuery);
   if (!division) {

@@ -170,17 +170,6 @@ describe('Division Route', () => {
         data: { division: "division requested doesn't exist" },
       });
     });
-
-    it('validate id', async () => {
-      const res = await requestApp
-        .get(`${prefix}/divisions/no1`)
-        .set('Accept', 'application/json');
-      expect(res.statusCode).toEqual(400);
-      expect(res.body).toEqual({
-        status: 'fail',
-        data: { id: "id isn't a valid integer" },
-      });
-    });
   });
 
   describe('PATCH /divisions/:id', () => {

@@ -1,3 +1,5 @@
+import { PartialModelObject } from 'objection';
+
 import { Division } from '../models';
 import parsePgError from '../models/parse-pg-error';
 
@@ -13,7 +15,9 @@ const getDivision = async (id: number): Promise<Division> => {
   }
 };
 
-const createDivision = async (division: Division): Promise<Division> => {
+const createDivision = async (
+  division: PartialModelObject<Division>,
+): Promise<Division> => {
   try {
     return await Division.query().insert(division).returning('*');
   } catch (err) {
@@ -23,7 +27,7 @@ const createDivision = async (division: Division): Promise<Division> => {
 
 const updateDivision = async (
   id: number,
-  division: Division,
+  division: PartialModelObject<Division>,
 ): Promise<Division[]> => {
   try {
     return await Division.query().findById(id).patch(division).returning('*');
