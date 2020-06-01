@@ -1,11 +1,23 @@
-import winston from 'winston';
+import { createLogger, format, transports } from 'winston';
 
 import config from '../config';
 
-const logger = winston.createLogger({
+const { combine, timestamp, prettyPrint } = format;
+
+const logger = createLogger({
   transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: config.log.filename }),
+    new transports.Console({
+      level: 'warn',
+      format: combine(timestamp(), prettyPrint()),
+    }),
+    new transports.File({
+      level: 'info',
+      filename: config.log.filename,
+      format: timestamp(),
+      handleExceptions: true,
+      maxsize: 5242880,
+      maxFiles: 5,
+    }),
   ],
 });
 
